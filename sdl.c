@@ -15,8 +15,8 @@ static SDL_Renderer *renderer = NULL;
 
 
 
-extern int update(void);
-
+extern void update(void);
+extern void on_start(void);
 
 
 
@@ -31,10 +31,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE;
     }
 
-    if (!SDL_CreateWindowAndRenderer("window", 640, 480, 0, &window, &renderer)) {
+    if (!SDL_CreateWindowAndRenderer("window", 800, 800, 0, &window, &renderer)) {
         SDL_Log("Couldn't create window/renderer: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
+
+
+    on_start(); //asm on start
 
 
 
@@ -64,7 +67,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_RenderClear(renderer);
 
 
-    update();
+    update(); //asm update
 
 
 
